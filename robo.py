@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import simpledialog
 root = tk.Tk()
 root.title("proiect robot")
 canvas = tk.Canvas(root, width=400, height=400, bg="white")
@@ -9,6 +10,16 @@ dimensiune = 45
 viteza_x=2
 viteza_y=2
 canvas.create_rectangle(20, 20, 380, 380, fill="white", outline="black", width=2)
+tinta = canvas.create_rectangle(320, 320, 360, 360, fill="green")
+nr_obstacole = simpledialog.askinteger("Input", "Introduceti numarul de obstacole (1-5):", minvalue=1, maxvalue=5)
+obstacole = []
+for i in range(nr_obstacole):
+    x1 = simpledialog.askinteger("Input", f"Introduceti coordonata x a obstacolului {i+1} (20-380):", minvalue=20, maxvalue=380)
+    y1 = simpledialog.askinteger("Input", f"Introduceti coordonata y a obstacolului {i+1} (20-380):", minvalue=20, maxvalue=380)
+    x2 = x1 + 40
+    y2 = y1 + 40
+    obstacol = canvas.create_rectangle(x1, y1, x2, y2, fill="red")
+    obstacole.append(obstacol)
 def miscare_robot():
     global x, y,viteza_x, viteza_y
     x += viteza_x
