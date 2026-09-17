@@ -71,6 +71,7 @@ def matrice_grila():
                 rand_curent.append(".")
         matrice.append(rand_curent)
     return matrice 
+#am implementat algoritmul BFS pentru a gasi drumul de la robot la tinta, evitand obstacolele
 def drum():
     matrice = matrice_grila()
     coada = [(0, 0)]
