@@ -16,7 +16,7 @@ nr_obstacole = simpledialog.askinteger("Input", "Introduceti numarul de obstacol
 obstacole = []
 for i in range(nr_obstacole):
     x1 = simpledialog.askinteger("Input", f"Introduceti coordonata x a obstacolului {i+1} (20-380):", minvalue=20, maxvalue=380)
-    y1 = simpledialog.askinteger("Input", f"Introduceti coordonata y a obstacolului {i+1} (20-380):", minvalue=20, maxvalue=380)
+    y1 = simpledialog.askinteger("Input", f"Introduceti coordonata y a obstacolului {i+1} (70-380):", minvalue=70, maxvalue=380)
     x2 = x1 + 40
     y2 = y1 + 40
     obstacol = canvas.create_rectangle(x1, y1, x2, y2, fill="red")
@@ -29,7 +29,7 @@ def miscare_robot():
             x, y = coordonate_grila(rand, col)
             canvas.coords(robot, x, y, x + dimensiune, y + dimensiune)
             root.update()
-            root.after(200)
+            root.after(1000)
         messagebox.showinfo("Felicitari!", "Robotul a atins tinta!")
         root.destroy()
     else:
