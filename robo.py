@@ -21,6 +21,7 @@ for i in range(nr_obstacole):
     y2 = y1 + 40
     obstacol = canvas.create_rectangle(x1, y1, x2, y2, fill="red")
     obstacole.append(obstacol)
+#am implementat functia de miscare a robotului, care va urma drumul gasit de algoritmul BFS
 def miscare_robot():
     traseu = drum() 
 
