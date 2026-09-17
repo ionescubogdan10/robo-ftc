@@ -22,22 +22,18 @@ for i in range(nr_obstacole):
     obstacol = canvas.create_rectangle(x1, y1, x2, y2, fill="red")
     obstacole.append(obstacol)
 def miscare_robot():
-    global x, y,viteza_x, viteza_y
-    x += viteza_x
-    y += viteza_y
-    if atingere_tinta():
+    traseu = drum() 
+
+    if traseu:
+        for rand, col in traseu:
+            x, y = coordonate_grila(rand, col)
+            canvas.coords(robot, x, y, x + dimensiune, y + dimensiune)
+            root.update()
+            root.after(200)
         messagebox.showinfo("Felicitari!", "Robotul a atins tinta!")
         root.destroy()
-        return
-    if evitare_obstacole():
-        viteza_x = -viteza_x
-        viteza_y = -viteza_y
-    if x < 20 or x + dimensiune > 380:
-        viteza_x = -viteza_x
-    if y < 20 or y + dimensiune > 380:
-        viteza_y = -viteza_y
-    canvas.coords(robot, x, y, x+dimensiune, y+dimensiune)
-    root.after(50, miscare_robot)
+    else:
+        messagebox.showwarning("Nu mai e niciun drum spre tinta!")
 def evitare_obstacole():
     elemente = canvas.find_overlapping(x, y, x+dimensiune, y+dimensiune)
     for elem in elemente:
