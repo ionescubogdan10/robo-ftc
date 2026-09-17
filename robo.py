@@ -34,6 +34,7 @@ def miscare_robot():
         root.destroy()
     else:
         messagebox.showwarning("Nu mai e niciun drum spre tinta!")
+#implementarea functiei de evitare a obstacolelor
 def evitare_obstacole():
     elemente = canvas.find_overlapping(x, y, x+dimensiune, y+dimensiune)
     for elem in elemente:
