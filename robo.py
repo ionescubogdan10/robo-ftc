@@ -73,6 +73,26 @@ def matrice_grila():
                 rand_curent.append(".")
         matrice.append(rand_curent)
     return matrice 
+def drum():
+    matrice = matrice_grila()
+    coada = [(0, 0)]
+    parinte = {(0, 0): None}
+    for rand, col in coada:
+        if matrice[rand][col] == "T":
+            rezultat = []
+            curent = (rand, col)
+            while curent is not None:
+                rezultat.append(curent)
+                curent = parinte[curent]
+            return rezultat[::-1] 
+        for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
+            r, c = rand + dr, col + dc
+            if 0 <= r < 9 and 0 <= c < 9 and matrice[r][c] != "O":
+                if (r, c) not in parinte:
+                    parinte[(r, c)] = (rand, col)
+                    coada.append((r, c)) # Îl punem la rând
+                    
+    return None
 robot = canvas.create_rectangle(x, y, x+dimensiune, y+dimensiune, fill="blue", outline="black", width=2)
 miscare_robot()
 #harta = matrice_grila()
