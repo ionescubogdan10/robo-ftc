@@ -1,1 +1,1 @@
-print("salut")
+from tkinter import *
