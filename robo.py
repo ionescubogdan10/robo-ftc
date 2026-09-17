@@ -40,6 +40,7 @@ def evitare_obstacole():
         if elem in obstacole:
             return True
     return False
+#implementare verificarea tintei
 def atingere_tinta():
     elemente = canvas.find_overlapping(x, y, x+dimensiune, y+dimensiune)
     for elem in elemente:
@@ -86,7 +87,7 @@ def drum():
             if 0 <= r < 9 and 0 <= c < 9 and matrice[r][c] != "O":
                 if (r, c) not in parinte:
                     parinte[(r, c)] = (rand, col)
-                    coada.append((r, c)) # Îl punem la rând
+                    coada.append((r, c))
                     
     return None
 robot = canvas.create_rectangle(x, y, x+dimensiune, y+dimensiune, fill="blue", outline="black", width=2)
