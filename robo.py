@@ -55,6 +55,7 @@ def coordonate_grila(rand, col):
     x = 20 + col * 40
     y = 20 + rand * 40
     return x, y
+#am implementat functia de creare a matricei grilei pentru a putea folosi algoritmul de cautare a drumului
 def matrice_grila():
     matrice =  []
     for rand in range(9):
