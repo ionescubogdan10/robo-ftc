@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import simpledialog
+from tkinter import messagebox
 root = tk.Tk()
 root.title("proiect robot")
 canvas = tk.Canvas(root, width=400, height=400, bg="white")
@@ -24,6 +25,10 @@ def miscare_robot():
     global x, y,viteza_x, viteza_y
     x += viteza_x
     y += viteza_y
+    if atingere_tinta():
+        messagebox.showinfo("Felicitari!", "Robotul a atins tinta!")
+        root.destroy()
+        return
     if evitare_obstacole():
         viteza_x = -viteza_x
         viteza_y = -viteza_y
@@ -39,7 +44,12 @@ def evitare_obstacole():
         if elem in obstacole:
             return True
     return False
-
+def atingere_tinta():
+    elemente = canvas.find_overlapping(x, y, x+dimensiune, y+dimensiune)
+    for elem in elemente:
+        if elem == tinta:
+            return True
+    return False
 robot = canvas.create_rectangle(x, y, x+dimensiune, y+dimensiune, fill="blue", outline="black", width=2)
 miscare_robot()
     
