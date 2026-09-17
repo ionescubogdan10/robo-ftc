@@ -24,12 +24,22 @@ def miscare_robot():
     global x, y,viteza_x, viteza_y
     x += viteza_x
     y += viteza_y
+    if evitare_obstacole():
+        viteza_x = -viteza_x
+        viteza_y = -viteza_y
     if x < 20 or x + dimensiune > 380:
         viteza_x = -viteza_x
     if y < 20 or y + dimensiune > 380:
         viteza_y = -viteza_y
     canvas.coords(robot, x, y, x+dimensiune, y+dimensiune)
     root.after(50, miscare_robot)
+def evitare_obstacole():
+    elemente = canvas.find_overlapping(x, y, x+dimensiune, y+dimensiune)
+    for elem in elemente:
+        if elem in obstacole:
+            return True
+    return False
+
 robot = canvas.create_rectangle(x, y, x+dimensiune, y+dimensiune, fill="blue", outline="black", width=2)
 miscare_robot()
     
