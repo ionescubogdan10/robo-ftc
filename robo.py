@@ -58,7 +58,24 @@ def coordonate_grila(rand, col):
     x = 20 + col * 40
     y = 20 + rand * 40
     return x, y
+def matrice_grila():
+    matrice =  []
+    for rand in range(9):
+        rand_curent = []
+        for col in range(9):
+            x, y = coordonate_grila(rand, col)
+            elemente = canvas.find_overlapping(x+5, y+5, x+35, y+35)
+            if tinta in elemente:
+                rand_curent.append("T")
+            elif any(elem in obstacole for elem in elemente):
+                rand_curent.append("O")
+            else:
+                rand_curent.append(".")
+        matrice.append(rand_curent)
+    return matrice 
 robot = canvas.create_rectangle(x, y, x+dimensiune, y+dimensiune, fill="blue", outline="black", width=2)
 miscare_robot()
-    
+#harta = matrice_grila()
+#for r in harta:
+#    print(r)
 root.mainloop()
