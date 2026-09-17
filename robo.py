@@ -51,6 +51,7 @@ def pixeli_grila(x, y):
     col = (x - 20) // 40
     rand = (y - 20) // 40
     return rand, col
+#am adaugat functia pentru a obtine coordonatele grilei in functie de rand si coloana
 def coordonate_grila(rand, col):
     x = 20 + col * 40
     y = 20 + rand * 40
