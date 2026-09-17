@@ -47,6 +47,7 @@ def atingere_tinta():
         if elem == tinta:
             return True
     return False
+#ttransformarea pixeqilor in coordonate de grila
 def pixeli_grila(x, y):
     col = (x - 20) // 40
     rand = (y - 20) // 40
