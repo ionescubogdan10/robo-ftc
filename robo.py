@@ -8,11 +8,9 @@ canvas.pack()
 x=45
 y=45
 dimensiune = 45
-viteza_x=2
-viteza_y=2
 canvas.create_rectangle(20, 20, 380, 380, fill="white", outline="black", width=2)
 tinta = canvas.create_rectangle(320, 320, 360, 360, fill="green")
-nr_obstacole = simpledialog.askinteger("Input", "Introduceti numarul de obstacole (1-5):", minvalue=1, maxvalue=5)
+nr_obstacole = simpledialog.askinteger("Input", "Introduceti numarul de obstacole (1-10):", minvalue=1, maxvalue=10)
 obstacole = []
 for i in range(nr_obstacole):
     x1 = simpledialog.askinteger("Input", f"Introduceti coordonata x a obstacolului {i+1} (20-380):", minvalue=20, maxvalue=380)
@@ -21,19 +19,6 @@ for i in range(nr_obstacole):
     y2 = y1 + 40
     obstacol = canvas.create_rectangle(x1, y1, x2, y2, fill="red")
     obstacole.append(obstacol)
-def miscare_robot():
-    traseu = drum() 
-
-    if traseu:
-        for rand, col in traseu:
-            x, y = coordonate_grila(rand, col)
-            canvas.coords(robot, x, y, x + dimensiune, y + dimensiune)
-            root.update()
-            root.after(1000)
-        messagebox.showinfo("Felicitari!", "Robotul a atins tinta!")
-        root.destroy()
-    else:
-        messagebox.showwarning("Nu mai e niciun drum spre tinta!")
 def evitare_obstacole():
     elemente = canvas.find_overlapping(x, y, x+dimensiune, y+dimensiune)
     for elem in elemente:
@@ -89,6 +74,19 @@ def drum():
                     coada.append((r, c)) # Îl punem la rând
                     
     return None
+def miscare_robot():
+    traseu = drum() 
+
+    if traseu:
+        for rand, col in traseu:
+            x, y = coordonate_grila(rand, col)
+            canvas.coords(robot, x, y, x + dimensiune, y + dimensiune)
+            root.update()
+            root.after(1000)
+        messagebox.showinfo("Felicitari!", "Robotul a atins tinta!")
+        root.destroy()
+    else:
+        messagebox.showwarning("Nu mai e niciun drum spre tinta!")
 robot = canvas.create_rectangle(x, y, x+dimensiune, y+dimensiune, fill="blue", outline="black", width=2)
 miscare_robot()
 #harta = matrice_grila()
