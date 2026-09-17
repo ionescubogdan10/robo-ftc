@@ -23,7 +23,6 @@ for i in range(nr_obstacole):
     obstacole.append(obstacol)
 def miscare_robot():
     traseu = drum() 
-
     if traseu:
         for rand, col in traseu:
             x, y = coordonate_grila(rand, col)
@@ -54,6 +53,7 @@ def coordonate_grila(rand, col):
     x = 20 + col * 40
     y = 20 + rand * 40
     return x, y
+#am implementat functia de creare a matricei grilei pentru a putea folosi algoritmul de cautare a drumului
 def matrice_grila():
     matrice =  []
     for rand in range(9):
@@ -86,7 +86,7 @@ def drum():
             if 0 <= r < 9 and 0 <= c < 9 and matrice[r][c] != "O":
                 if (r, c) not in parinte:
                     parinte[(r, c)] = (rand, col)
-                    coada.append((r, c)) # Îl punem la rând
+                    coada.append((r, c)) 
                     
     return None
 robot = canvas.create_rectangle(x, y, x+dimensiune, y+dimensiune, fill="blue", outline="black", width=2)
