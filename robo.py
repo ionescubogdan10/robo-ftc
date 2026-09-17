@@ -12,16 +12,15 @@ viteza_x=2
 viteza_y=2
 canvas.create_rectangle(20, 20, 380, 380, fill="white", outline="black", width=2)
 tinta = canvas.create_rectangle(320, 320, 360, 360, fill="green")
-nr_obstacole = simpledialog.askinteger("Input", "Introduceti numarul de obstacole (1-10):", minvalue=1, maxvalue=10)
+nr_obstacole = simpledialog.askinteger("Input", "Introduceti numarul de obstacole (1-5):", minvalue=1, maxvalue=5)
 obstacole = []
 for i in range(nr_obstacole):
     x1 = simpledialog.askinteger("Input", f"Introduceti coordonata x a obstacolului {i+1} (20-380):", minvalue=20, maxvalue=380)
-    y1 = simpledialog.askinteger("Input", f"Introduceti coordonata y a obstacolului {i+1} (70-380):", minvalue=70, maxvalue=380)
+    y1 = simpledialog.askinteger("Input", f"Introduceti coordonata y a obstacolului {i+1} (20-380):", minvalue=20, maxvalue=380)
     x2 = x1 + 40
     y2 = y1 + 40
     obstacol = canvas.create_rectangle(x1, y1, x2, y2, fill="red")
     obstacole.append(obstacol)
-#am implementat functia de miscare a robotului, care va urma drumul gasit de algoritmul BFS
 def miscare_robot():
     traseu = drum() 
 
@@ -30,31 +29,27 @@ def miscare_robot():
             x, y = coordonate_grila(rand, col)
             canvas.coords(robot, x, y, x + dimensiune, y + dimensiune)
             root.update()
-            root.after(1000)
+            root.after(200)
         messagebox.showinfo("Felicitari!", "Robotul a atins tinta!")
         root.destroy()
     else:
         messagebox.showwarning("Nu mai e niciun drum spre tinta!")
-#implementarea functiei de evitare a obstacolelor
 def evitare_obstacole():
     elemente = canvas.find_overlapping(x, y, x+dimensiune, y+dimensiune)
     for elem in elemente:
         if elem in obstacole:
             return True
     return False
-#implementare verificarea tintei
 def atingere_tinta():
     elemente = canvas.find_overlapping(x, y, x+dimensiune, y+dimensiune)
     for elem in elemente:
         if elem == tinta:
             return True
     return False
-#ttransformarea pixeqilor in coordonate de grila
 def pixeli_grila(x, y):
     col = (x - 20) // 40
     rand = (y - 20) // 40
     return rand, col
-#am adaugat functia pentru a obtine coordonatele grilei in functie de rand si coloana
 def coordonate_grila(rand, col):
     x = 20 + col * 40
     y = 20 + rand * 40
@@ -74,7 +69,6 @@ def matrice_grila():
                 rand_curent.append(".")
         matrice.append(rand_curent)
     return matrice 
-#am implementat algoritmul BFS pentru a gasi drumul de la robot la tinta, evitand obstacolele
 def drum():
     matrice = matrice_grila()
     coada = [(0, 0)]
@@ -92,12 +86,12 @@ def drum():
             if 0 <= r < 9 and 0 <= c < 9 and matrice[r][c] != "O":
                 if (r, c) not in parinte:
                     parinte[(r, c)] = (rand, col)
-                    coada.append((r, c))
+                    coada.append((r, c)) # Îl punem la rând
                     
     return None
 robot = canvas.create_rectangle(x, y, x+dimensiune, y+dimensiune, fill="blue", outline="black", width=2)
 miscare_robot()
-harta = matrice_grila()
-for r in harta:
-    print(r)
+#harta = matrice_grila()
+#for r in harta:
+#    print(r)
 root.mainloop()
