@@ -31,10 +31,6 @@ def atingere_tinta():
         if elem == tinta:
             return True
     return False
-def pixeli_grila(x, y):
-    col = (x - 20) // 40
-    rand = (y - 20) // 40
-    return rand, col
 def coordonate_grila(rand, col):
     x = 20 + col * 40
     y = 20 + rand * 40
